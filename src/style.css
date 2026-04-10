@@ -77,6 +77,12 @@ canvas {
   font-weight: bold;
 }
 
+.high-score {
+  font-size: 1.8em;
+  color: #dcdcaa;
+  font-weight: bold;
+}
+
 .pattern-preview {
   margin-top: 10px;
 }
@@ -149,12 +155,6 @@ canvas {
 
 .game-over button:hover {
   background: #ff9d88;
-}
-
-.status {
-  color: #4ec9b0;
-  font-size: 0.9em;
-  margin-top: 10px;
 }
 
 @media (max-width: 768px) {

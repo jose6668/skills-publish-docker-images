@@ -38,6 +38,7 @@ let currentPiece = null;
 let currentX = 0;
 let currentY = 0;
 let score = 0;
+let highScore = 0;
 let gameOver = false;
 let isPaused = false;
 let dropCounter = 0;
@@ -51,11 +52,15 @@ function init() {
   ctx = canvas.getContext("2d");
   patternCanvas = document.getElementById("patternCanvas");
   patternCtx = patternCanvas.getContext("2d");
+  highScore = Number.parseInt(localStorage.getItem("stackoverflown-high-score") || "0", 10);
 
   // Initialize empty board
   board = Array(ROWS)
     .fill(null)
     .map(() => Array(COLS).fill(0));
+
+  updateScore();
+  updateHighScore();
 
   // Set initial target pattern
   setNewTargetPattern();
@@ -307,6 +312,16 @@ function clearPattern(startRow, startCol) {
 // Update score display
 function updateScore() {
   document.getElementById("score").textContent = score;
+  if (score > highScore) {
+    highScore = score;
+    localStorage.setItem("stackoverflown-high-score", String(highScore));
+    updateHighScore();
+  }
+}
+
+// Update high score display
+function updateHighScore() {
+  document.getElementById("high-score").textContent = highScore;
 }
 
 // Handle keyboard input
@@ -345,7 +360,6 @@ function handleKeyPress(e) {
 // Toggle pause
 function togglePause() {
   isPaused = !isPaused;
-  document.getElementById("status").textContent = isPaused ? "Paused" : "Playing...";
 }
 
 // End game
